@@ -10,16 +10,17 @@
     --pln-blue: #0f3bb3;
     --pln-yellow: #ffd400;
     --accent: #ff5722;
-    --bg: #f2f6ff;
+    --bg: #19a1bb;
     --card: #ffffff;
     --muted: #556;
+    --kop: #145c74;
   }
 
   *{box-sizing:border-box}
   body{
     margin:0;
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    background: linear-gradient(180deg, var(--bg), #ffffff 60%);
+    background: linear-gradient(180deg, var(--card), var(--bg) 300%);
     color: #112;
   }
 
@@ -29,13 +30,25 @@
     align-items:center;
     gap:12px;
     border-bottom: 1px solid rgba(0,0,0,0.06);
+    background:linear-gradient(90deg, var(--kop), var(--bg) 40%);
   }
+  header .logo-right {
+  margin-left: auto;          /* Dorong ke kanan */
+  display: flex;
+  align-items: center;
+}
+
+header .logo-right img {
+  height: 46px;               /* Atur tinggi logo */
+  width: auto;
+  border-radius: 6px;         /* Opsional: beri sedikit radius */
+}
   header h1{
     margin:0;
     font-size:18px;
-    color:var(--pln-blue);
+    color:var(--card);
   }
-  header p{ margin:0; color:var(--muted); font-size:13px }
+  header p{ margin:0; color:var(--card); font-size:13px }
 
   /* Layout */
   .wrap{
@@ -215,8 +228,11 @@
     JTM
   </div>
   <div>
-    <h1>Interaktif — Konstruksi Jaringan Tegangan Menengah</h1>
+    <h1>Konstruksi Jaringan Tegangan Menengah</h1>
     <p>Ketuk titik pada gambar atau pilih dari daftar untuk menampilkan informasi komponen.</p>
+  </div>
+  <div class="logo-right">
+    <img src="PLN.png" alt="Logo PLN">
   </div>
 </header>
 
@@ -224,7 +240,7 @@
   <main class="main">
     <div class="image-card">
       <div class="container" id="imageContainer">
-        <img src="JTM.PNG" alt="Gambar JTM" class="jtm-img" id="jtmImg">
+        <img src="JTM.png" alt="Gambar JTM" class="jtm-img" id="jtmImg">
 
         <!-- highlight element (re-used for any selected hotspot) -->
         <div id="highlight" class="highlight"></div>
@@ -255,6 +271,10 @@
         <p class="popup-desc" id="popupDesc">Deskripsi singkat komponen.</p>
       </div>
     </div>
+    <div style="margin:15px 0;text-align:center;">
+      <img id="popupImg" src="" alt="Komponen" style="max-width:240px;border-radius:8px;box-shadow:0 4px 10px rgba(0,0,0,0.15);">
+    </div>
+
 
     <div class="popup-actions">
       <button class="btn btn-close" onclick="closePopup()">Tutup</button>
@@ -271,19 +291,19 @@
   Positions approximated visually — sesuaikan jika perlu.
 */
 const hotspots = [
-  {id:1, top:"3.5%",  left:"16.1%",  title:"Konduktor/Saluran Tegangan", desc:"Konduktor JTM (20 kV) menghantarkan energi listrik pada jaringan tegangan menengah."},
-  {id:2, top:"2.9%",  left:"63.7%",  title:"Isolator dan Crossarm", desc:"Isolator pada crossarm yang menahan konduktor dan memberikan isolasi listrik."},
-  {id:3, top:"18.5%", left:"5.7%",  title:"Tongkat/Gudang Penampang", desc:"Perlengkapan penghubung dan penopang konduktor di kepala tiang."},
-  {id:4, top:"18.3%", left:"36.55%",  title:"Isolator Tumpu 20 kV", desc:"Isolator tumpu untuk menahan konduktor pada tiang dan mencegah arus bocor ke tanah."},
-  {id:5, top:"19.1%", left:"86.8%",  title:"Perlengkapan Sambungan Konduktor", desc:"Sambungan dan aksesori pada bagian penyangga pole sisi kanan."},
-  {id:6, top:"31.4%", left:"88.19%",  title:"Transformator Distribusi", desc:"Transformator menurunkan tegangan dari 20 kV ke 220/380 V untuk distribusi pelanggan."},
-  {id:7, top:"49%", left:"70%",  title:"Panel/Kotak Proteksi", desc:"Kotak proteksi dan peralatan kontrol pada sisi transformator."},
-  {id:8, top:"92.9%", left:"35.75%",  title:"Sistem Grounding / Tanah", desc:"Sistem grounding untuk keselamatan listrik dan proteksi terhadap gangguan."},
-  {id:9, top:"70.8%", left:"50.6%",  title:"Perlengkapan Fuse/OLTC", desc:"Perangkat proteksi seperti fuse, relay, atau aksesori lainnya pada tiang."},
-  {id:10, top:"69.5%", left:"90.8%", title:"Tiang Beton/Struktur Penopang", desc:"Tiang penopang utama pada sisi kanan yang menahan beban struktur."},
-  {id:11, top:"28%", left:"5.5%",  title:"Tangki/Papan Akses", desc:"Komponen akses untuk maintenance atau penempatan peralatan di tiang."},
-  {id:12, top:"41.5%", left:"30%",  title:"Papan Kerja / Platform", desc:"Platform kerja atau bracket yang digunakan untuk akses teknisi."},
-  {id:13, top:"51.95%", left:"9.2%",  title:"Konduktor Penurun / Neutral", desc:"Konduktor penurun atau kawat netral menuju sambungan distribusi bawah."}
+  {id:1, top:"3.5%",  left:"16.1%",  title:"Isolator Tumpu 20 kV", desc:"Isolator tumpu untuk menahan konduktor pada tiang dan mencegah arus bocor ke tanah.", img: "Isolator.jpg"},
+  {id:2, top:"2.9%",  left:"63.7%",  title:"Isolator dan Crossarm", desc:"Isolator pada crossarm yang menahan konduktor dan memberikan isolasi listrik.", img: ""},
+  {id:3, top:"18.5%", left:"5.7%",  title:"Tongkat/Gudang Penampang", desc:"Perlengkapan penghubung dan penopang konduktor di kepala tiang.", img: ""},
+  {id:4, top:"18.3%", left:"36.55%",  title:"Isolator Tumpu 20 kV", desc:"Isolator tumpu untuk menahan konduktor pada tiang dan mencegah arus bocor ke tanah.", img: ""},
+  {id:5, top:"19.1%", left:"86.8%",  title:"Perlengkapan Sambungan Konduktor", desc:"Sambungan dan aksesori pada bagian penyangga pole sisi kanan.", img: ""},
+  {id:6, top:"31.4%", left:"88.19%",  title:"Transformator Distribusi", desc:"Transformator menurunkan tegangan dari 20 kV ke 220/380 V untuk distribusi pelanggan.", img: "trafo.jpg"},
+  {id:7, top:"49%", left:"70%",  title:"Panel/Kotak Proteksi", desc:"Kotak proteksi dan peralatan kontrol pada sisi transformator.", img: ""},
+  {id:8, top:"92.9%", left:"35.75%",  title:"Sistem Grounding / Tanah", desc:"Sistem grounding untuk keselamatan listrik dan proteksi terhadap gangguan.", img: ""},
+  {id:9, top:"70.8%", left:"50.6%",  title:"Perlengkapan Fuse/OLTC", desc:"Perangkat proteksi seperti fuse, relay, atau aksesori lainnya pada tiang.", img: ""},
+  {id:10, top:"69.5%", left:"90.8%", title:"Tiang Beton/Struktur Penopang", desc:"Tiang penopang utama pada sisi kanan yang menahan beban struktur.", img: ""},
+  {id:11, top:"28%", left:"5.5%",  title:"Tangki/Papan Akses", desc:"Komponen akses untuk maintenance atau penempatan peralatan di tiang.", img: ""},
+  {id:12, top:"41.5%", left:"30%",  title:"Papan Kerja / Platform", desc:"Platform kerja atau bracket yang digunakan untuk akses teknisi.", img: ""},
+  {id:13, top:"51.95%", left:"9.2%",  title:"Konduktor Penurun / Neutral", desc:"Konduktor penurun atau kawat netral menuju sambungan distribusi bawah.", img: ""}
 ];
 
 // Helper to create hotspots in DOM
@@ -329,6 +349,8 @@ function openInfo(id){
   popupNum.innerText = data.id;
   popupTitle.innerText = data.title;
   popupDesc.innerText = data.desc;
+  document.getElementById('popupImg').src = data.img || "";
+
 
   // position & show highlight
   highlight.style.top = data.top;
@@ -386,7 +408,12 @@ document.addEventListener('keydown', (ev) => {
   if(ev.key === 'Escape') closePopup();
 });
 </script>
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+    .then(() => console.log("Service Worker Registered"));
+}
+</script>
 
 </body>
 </html>
-
