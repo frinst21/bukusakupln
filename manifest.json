@@ -1,0 +1,20 @@
+{
+  "name": "Interaktif JTM",
+  "short_name": "JTM",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#bef1ff",
+  "theme_color": "#008cff",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
